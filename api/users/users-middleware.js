@@ -4,6 +4,11 @@ const bodyVerify = (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
     next({ status: 400, message: "username and password required" });
+  } else if (username.length < 5 || password.length < 5) {
+    next({
+      status: 400,
+      message: "username and password must be at least 5 characters",
+    });
   } else {
     next();
   }
